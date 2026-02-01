@@ -1,4 +1,4 @@
-const { Client } = require('pg');
+import { Client } from 'pg';
 
 export default async function handler(req, res) {
     const client = new Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } });
@@ -20,4 +20,5 @@ exports.handler = async () => {
         await client.end();
         return { statusCode: 200, body: JSON.stringify(result.rows) };
     } catch (error) { return { statusCode: 500, body: JSON.stringify({ error: error.message }) }; }
+
 };
